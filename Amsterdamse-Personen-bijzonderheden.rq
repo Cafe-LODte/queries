@@ -1,0 +1,40 @@
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix schema: <https://schema.org/>
+
+
+construct{
+  ?persoon schema:performerIn ?activity .
+  ?activity a schema:Event;
+            rdfs:label ?activityLabel .
+            
+
+  
+}
+  {
+select distinct *
+where{
+service<https://query.wikidata.org/sparql>{
+
+      ?straatURI wdt:P31 wd:Q79007 ;
+                 wdt:P973 ?adamlink.
+   filter(contains(str(?adamlink), "adamlink"))
+      ?straatURI wdt:P138 ?persoon .
+      ?persoon wdt:P31 wd:Q5 ;
+               wdt:P1344/wdt:P31 ?activity .
+  ?activity rdfs:label ?activityLabel .
+
+  filter(lang(?activityLabel) = "en" && contains(?activityLabel, "Olympic"))
+  
+
+
+
+     
+
+}
+}
+}
+
+    
+
