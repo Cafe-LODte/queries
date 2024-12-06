@@ -1,0 +1,18 @@
+prefix schema: <https://schema.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix geo: <http://www.opengis.net/ont/geosparql#>
+select * where {
+  ?straatURI rdfs:label ?wikiID;
+             schema:name ?straatNaam ;
+             geo:hasGeometry/geo:asWKT ?asWKT ;
+             schema:honorificFor ?pesoon ;
+             schema:relatedLink ?adamlinkURI .
+  ?persoon schema:name ?persoonNaam ;
+           schema:geslacht ?geslacht ;
+           schema:hasOccupation ?beroeopURI .
+
+  ?beroeopURI rdfs:label ?beroepLabel .
+           
+  ?adamlinkURI schema:sameAS ?bagURI .
+  ?bagURI rdfs:label ?bagID .
+} 
